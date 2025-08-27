@@ -1,3 +1,4 @@
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.db import models
 
 
@@ -215,10 +216,11 @@ class User(ModelBase):
         blank=False,
     )
 
-    cpf = models.IntegerField(
+    cpf = models.CharField(
         db_column='tx_cpf',
         null=False,
         blank=False,
+        validators=[MinLengthValidator(11),MaxLengthValidator(11)]
     )
 
     date_birth = models.DateField(

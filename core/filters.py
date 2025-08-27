@@ -41,7 +41,7 @@ class BookFilter(filters.FilterSet):
 
 class UserFilter(filters.FilterSet):
     name = filters.CharFilter(field_name="name", lookup_expr=LIKE)
-    cpf = filters.NumberFilter(field_name="cpf", lookup_expr=LIKE)
+    cpf = filters.CharFilter(field_name="cpf", lookup_expr=STARTS_WITH)
     status = filters.NumberFilter(field_name="status", lookup_expr=LIKE)
     profile = filters.ModelMultipleChoiceFilter(field_name="profile", queryset=models.Profile.objects.all())
 
