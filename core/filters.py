@@ -1,18 +1,19 @@
-
 from django_filters import rest_framework as filters
+
 from core import models
 
 # Filtros de pesquisa
-LIKE = 'unaccent__icontains' # Usando unaccent para ignorar acentos e trazer palavras semelhantes
-ICONTAINS = 'icontains' # Usando icontains para trazer palavras semelhantes
-UNACCENT_IEXACT = 'unaccent__iexact' # Usando unaccent para ignorar acentos e trazer palavras exatas
-EQUALS = 'exact' # Usando exact para trazer o campo exatas
-STARTS_WITH = 'startswith' # Usando startswith para trazer palavras que começam com o termo pesquisado
-GT = 'gt' # maior que
-LT = 'lt' # menor que
-GTE = 'gte' # maior ou igual a
-LTE = 'lte' # menor ou igual a
-IN = 'in' # Usando in para trazer palavras que estão na lista
+LIKE = 'unaccent__icontains'  # Usando unaccent para ignorar acentos e trazer palavras semelhantes
+ICONTAINS = 'icontains'  # Usando icontains para trazer palavras semelhantes
+UNACCENT_IEXACT = 'unaccent__iexact'  # Usando unaccent para ignorar acentos e trazer palavras exatas
+EQUALS = 'exact'  # Usando exact para trazer o campo exatas
+STARTS_WITH = 'startswith'  # Usando startswith para trazer palavras que começam com o termo pesquisado
+GT = 'gt'  # maior que
+LT = 'lt'  # menor que
+GTE = 'gte'  # maior ou igual a
+LTE = 'lte'  # menor ou igual a
+IN = 'in'  # Usando in para trazer palavras que estão na lista
+
 
 class AuthorFilter(filters.FilterSet):
     name = filters.CharFilter(field_name="name", lookup_expr=LIKE)
@@ -25,6 +26,7 @@ class AuthorFilter(filters.FilterSet):
         model = models.Author
         fields = ["name", "country", "email", "created_at_gte", "created_at_lte"]
 
+
 class BookFilter(filters.FilterSet):
     title = filters.CharFilter(field_name="title", lookup_expr=LIKE)
     publication_date_gte = filters.DateFilter(field_name="publication_date", lookup_expr=GTE)
@@ -36,6 +38,7 @@ class BookFilter(filters.FilterSet):
         model = models.Book
         fields = ["title", "publication_date_gte", "publication_date_lte", "author", "category"]
 
+
 class UserFilter(filters.FilterSet):
     name = filters.CharFilter(field_name="name", lookup_expr=LIKE)
     cpf = filters.NumberFilter(field_name="cpf", lookup_expr=LIKE)
@@ -45,6 +48,7 @@ class UserFilter(filters.FilterSet):
     class Meta:
         model = models.User
         fields = ["name", "cpf", "status", "profile"]
+
 
 class LoanFilter(filters.FilterSet):
     loan_gte = filters.DateFilter(field_name="loan", lookup_expr=GTE)
@@ -60,8 +64,9 @@ class LoanFilter(filters.FilterSet):
 
     class Meta:
         model = models.Loan
-        fields = ["loan_gte","loan_lte","date_withdraw_gte","date_withdraw_lte",
-                  "date_return_gte","date_return_lte","delivery_time","quantity_gt","book","user"]
+        fields = ["loan_gte", "loan_lte", "date_withdraw_gte", "date_withdraw_lte",
+                  "date_return_gte", "date_return_lte", "delivery_time", "quantity_gt", "book", "user"]
+
 
 class AddressFilter(filters.FilterSet):
     address = filters.CharFilter(field_name="address", lookup_expr=LIKE)
@@ -72,7 +77,8 @@ class AddressFilter(filters.FilterSet):
 
     class Meta:
         model = models.Address
-        fields = ["address","cep","public_place","reference_point","user"]
+        fields = ["address", "cep", "public_place", "reference_point", "user"]
+
 
 class PhoneFilter(filters.FilterSet):
     number = filters.NumberFilter(field_name="number", lookup_expr=LIKE)
@@ -80,7 +86,8 @@ class PhoneFilter(filters.FilterSet):
 
     class Meta:
         model = models.Phone
-        fields = ["number","user"]
+        fields = ["number", "user"]
+
 
 class ProfileFilter(filters.FilterSet):
     name = filters.CharFilter(field_name="name", lookup_expr=LIKE)
@@ -88,4 +95,4 @@ class ProfileFilter(filters.FilterSet):
 
     class Meta:
         model = models.Profile
-        fields = ["name","limit_delivery"]
+        fields = ["name", "limit_delivery"]
