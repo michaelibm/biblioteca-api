@@ -160,6 +160,13 @@ class Loan(ModelBase):
         null=False,
     )
 
+    employee = models.ForeignKey(  # Relation one to many between loan and book #
+        to='Employee',
+        db_column='id_employee',
+        on_delete=models.PROTECT,
+        null=True,
+    )
+
     class Meta:
         db_table = 'loan'
         verbose_name = 'Loan'
@@ -247,10 +254,11 @@ class User(ModelBase):
 
 
 class Phone(ModelBase):
-    number = models.IntegerField(
+    number = models.CharField(
         db_column='tx_number',
         null=False,
         blank=False,
+        validators=[MinLengthValidator(11), MaxLengthValidator(12)]
     )
 
     user = models.ForeignKey(  # Relation one to many between loan and book
@@ -289,3 +297,61 @@ class Profile(ModelBase):
         db_table = 'profile'
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
+
+class Function(ModelBase):
+    funcao = models.TextField(
+        db_column='tx_funcao',
+        null=False,
+        blank=False,
+    )
+
+
+    name = models.CharField(
+        db_column='tx_name',
+        max_length=240,
+        null=False,
+        blank=False,
+    )
+
+    class Meta:
+        db_table = 'employee'
+        verbose_name = 'employee'
+        verbose_name_plural = 'employee'
+
+
+class Employee(ModelBase):
+    nome = models.CharField(
+        db_column='tx_name',
+        max_length=120,
+        null=False,
+        blank=False,
+    )
+
+    cpf = models.CharField(
+        db_column='tx_cpf',
+        null=False,
+        blank=False,
+        validators=[MinLengthValidator(11),MaxLengthValidator(11)]
+    )
+
+    date_birth = models.DateField(
+        db_column='tx_birth_date',
+        null=False,
+        blank=False,
+    )
+
+    status = models.IntegerField(
+        db_column='tx_status',
+        null=False,
+        blank=False,
+    )
+
+    funcao = models.ManyToManyField(
+        'Function',
+        db_table='user_funcao',
+    )
+
+    class Meta:
+        db_table = 'Employee'
+        verbose_name = 'Employee'
+        verbose_name_plural = 'Employees'

@@ -1,7 +1,7 @@
 from rest_framework.routers import DefaultRouter
 
 from core.viewsets import AuthorViewSet, BookViewSet, UserViewSet, LoanViewSet, AddressViewSet, PhoneViewSet, \
-    ProfileViewSet
+    ProfileViewSet, EmployeeViewSet
 
 router = DefaultRouter()
 router.register('authors', AuthorViewSet)
@@ -11,5 +11,5 @@ router.register('loans', LoanViewSet)
 router.register('addresses', AddressViewSet)
 router.register('phones', PhoneViewSet)
 router.register('profiles', ProfileViewSet)
-
+router.register('employee', EmployeeViewSet, basename='books')
 urlpatterns = router.urls
