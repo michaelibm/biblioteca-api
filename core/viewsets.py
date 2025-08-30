@@ -55,3 +55,10 @@ class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ProfileSerializer
     filterset_class = filters.ProfileFilter
     permission_classes = [IsAuthenticated]
+
+
+class EmployeeViewSet(viewsets.ModelViewSet):
+    queryset = models.Employee.objects.all()
+    serializer_class = serializers.EmployeeSerializer
+    filterset_class = filters.EmployeeFilter
+    permission_classes = [IsAuthenticated]

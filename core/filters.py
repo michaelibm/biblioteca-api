@@ -96,3 +96,13 @@ class ProfileFilter(filters.FilterSet):
     class Meta:
         model = models.Profile
         fields = ["name", "limit_delivery"]
+
+class EmployeeFilter(filters.FilterSet):
+    name = filters.CharFilter(field_name="name", lookup_expr=LIKE)
+    cpf = filters.CharFilter(field_name="cpf", lookup_expr=STARTS_WITH)
+    status = filters.NumberFilter(field_name="status", lookup_expr=LIKE)
+    funcao = filters.ModelMultipleChoiceFilter(field_name="funcao", queryset=models.Profile.objects.all())
+
+    class Meta:
+        model = models.Employee
+        fields = ["name", "cpf", "status", "funcao"]

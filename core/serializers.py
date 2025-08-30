@@ -48,3 +48,14 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
         fields = '__all__'
+
+class EmployeeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.User
+        fields = '__all__'
+
+
+class FunctionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Profile
+        fields = '__all__'
